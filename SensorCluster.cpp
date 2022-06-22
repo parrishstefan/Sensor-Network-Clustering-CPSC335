@@ -13,7 +13,17 @@ using std::endl;
 */
 unsigned int hexa_to_number(char ch) {
     unsigned int temp = 0;
-    // TODO: implement this function
+    temp = ch;
+    if(temp >=48 && temp <=57)
+        temp = temp - 48;
+    else if(temp >=65 && temp <=70)
+        temp = temp - 55;
+    else if(temp >=97 && temp <=102)
+        temp = temp - 87;
+    else {
+        return 0;
+    }
+
     return temp;
 }
     
@@ -21,37 +31,37 @@ unsigned int hexa_to_number(char ch) {
 // function to return the hash value based on the first digit
 unsigned int hashfct1(string nic) {
   // TODO: implement this function, then delete the return statement below
-    return 0;  
+  return hexa_to_number(nic[0]); 
 }
 
 // function to return the hash value based on the second digit
 unsigned int hashfct2(string nic) {
-   // TODO: implement this function, then delete the return statement below
-    return 0; 
+  // TODO: implement this function, then delete the return statement below
+  return hexa_to_number(nic[1]);  
 }
 
 // function to return the hash value based on the third digit
 unsigned int hashfct3(string nic) {
    // TODO: implement this function, then delete the return statement below
-	return 0; 
+  return hexa_to_number(nic[2]);
 }
 
 // function to return the hash value based on the fourth digit
 unsigned int hashfct4(string nic) {
    // TODO: implement this function, then delete the return statement below
-	return 0; 
+  return hexa_to_number(nic[3]);
 }
 
 // function to return the hash value based on the fifth digit
 unsigned int hashfct5(string nic) {
     // TODO: implement this function, then delete the return statement below
-	return 0; 
+  return hexa_to_number(nic[4]);
 }
 
-// function to return the hash value based on the fourth digit
+// function to return the hash value based on the sixth digit
 unsigned int hashfct6(string nic) {
     // TODO: implement this function, then delete the return statement below
-	return 0; 
+  return hexa_to_number(nic[5]);
 }
 
 // Constructor for struct Item
@@ -80,6 +90,7 @@ void SensorNIC::readTextfile(string filename) {
 // function that adds the specified NIC to the sensor network (i.e., to all hash tables)
 void SensorNIC::addItem(string itemName, string nic) {
   // TO DO: implement this function, then delete the return statement below
+  
    return;
 }
 
