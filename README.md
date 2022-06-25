@@ -3,6 +3,6 @@ Project 3 NIC management for sensor networks
 
 Group members:
 
-Ada Lovelace adalovelace@csu.fullerton.edu
+Stefan Parrish parrishstefan@csu.fullerton.edu
 
 Charles Babbage charlesbab@csu.fullerton.edu
