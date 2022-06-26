@@ -3,6 +3,7 @@
 #include <fstream>
 #include <stdexcept>
 #include "SensorCluster.hpp"
+#include <climits>
  
 using std::string;
 using std::ifstream;
@@ -14,6 +15,7 @@ using std::endl;
 unsigned int hexa_to_number(char ch) {
     unsigned int temp = 0;
     temp = ch;
+    // Uses ASCII math to convert to HEX
     if(temp >=48 && temp <=57)
         temp = temp - 48;
     else if(temp >=65 && temp <=70)
@@ -116,42 +118,34 @@ bool SensorNIC::removeItem(string nic) {
 // Hints:
 // Calculate the balance of each hashtable, one by one.
 unsigned int SensorNIC::bestHashing() {
-  // TODO: implement this function, then delete the return statement below
-    
-  //unsigned best = hT1.bucket_size(0);
-  int lowestSize = 99999;
-  int highestSize = 0;
-  int tableIndex;
-  int bestBalance;
-  int tempBalance;
+  unsigned int lowestSize = UINT_MAX; // comparing variable initialized to the max size of unsigned in
+  unsigned int highestSize = 0;       // comparing variable initialized to the max size of unsigned in
+  int tableIndex;                     // table that has the best balance
+  int bestBalance;                    // value of the best balance
+  int tempBalance;                    // comparison for best balance
 
-  // std::cout << endl << "Bucket Count: " <<hT1.bucket_count() << endl;
-  // for (int i = 0; i < hT1.bucket_count(); i++)
-  // {
-  //   std::cout << endl << "Bucket Size[" << i << "]: " << hT1.bucket_size(i) << endl;
-  // }
 
-  std::cout << endl;
-
-  std::cout << hT1.size() << " " <<  hT1.bucket_count() << endl;
   for (unsigned i = 0; i < 0x10; i++) {
-    std::cout << "1 - " << hT1.bucket_size(i) << endl;
+    // if current bucket size is less than the lowest size
+    // replace lowest size
     if (lowestSize > hT1.bucket_size(i)) {
       lowestSize = hT1.bucket_size(i);
     }
+    // if current bucket size is greater than the highest size
+    // replace highest size
     if (highestSize < hT1.bucket_size(i)) {
       highestSize = hT1.bucket_size(i);
     }
   }
+  // initially sets the first to best balance since there is nothing to compare to
   bestBalance = highestSize - lowestSize;
+  // sets the table to hT1 since it is currently the best balance table
   tableIndex = 1;
-  std::cout << tableIndex << ": " << highestSize << "-" << lowestSize << "= " << bestBalance << endl << endl;
 ///////////////////////
+  // reset the highest/lowest sizes for comparing the next table
   highestSize = 0;
   lowestSize = 99999;
-  std::cout << hT2.size() << " " <<  hT2.bucket_count() << endl;
   for (unsigned i = 0; i < 0x10; i++) {
-    std::cout << "2 - " << hT2.bucket_size(i) << endl;
     if (lowestSize > hT2.bucket_size(i)) {
       lowestSize = hT2.bucket_size(i);
     }
@@ -160,17 +154,16 @@ unsigned int SensorNIC::bestHashing() {
     }
   }
   tempBalance = highestSize - lowestSize;
+  // checks if current balance is greater than the comparing table
+  // if it is, replace best balance and change table index to current table
   if (tempBalance < bestBalance) {
     bestBalance = tempBalance;
     tableIndex = 2;
   }
-  std::cout << tableIndex << ": " << highestSize << "-" << lowestSize << "= " << bestBalance << endl << endl;
 /////////////////////////////
   highestSize = 0;
   lowestSize = 99999;
-  std::cout << hT3.size() << " " <<  hT3.bucket_count() << endl;
   for (unsigned i = 0; i < 0x10; i++) {
-    std::cout << "3 - " << hT3.bucket_size(i) << endl;
     if (lowestSize > hT3.bucket_size(i)) {
       lowestSize = hT3.bucket_size(i);
     }
@@ -183,13 +176,10 @@ unsigned int SensorNIC::bestHashing() {
     bestBalance = tempBalance;
     tableIndex = 3;
   }
-  std::cout << tableIndex << ": " << highestSize << "-" << lowestSize << "= " << bestBalance << endl << endl;
 /////////////////////////////
   highestSize = 0;
   lowestSize = 99999;
-  std::cout << hT4.size() << " " <<  hT4.bucket_count() << endl;
   for (unsigned i = 0; i < 0x10; i++) {
-    std::cout << "4 - " << hT4.bucket_size(i) << endl;
     if (lowestSize > hT4.bucket_size(i)) {
       lowestSize = hT4.bucket_size(i);
     }
@@ -202,13 +192,10 @@ unsigned int SensorNIC::bestHashing() {
     bestBalance = tempBalance;
     tableIndex = 4;
   }
-  std::cout << tableIndex << ": " << highestSize << "-" << lowestSize << "= " << bestBalance << endl << endl;
 /////////////////////////////
   highestSize = 0;
   lowestSize = 99999;
-  std::cout << hT5.size() << " " <<  hT5.bucket_count() << endl;
   for (unsigned i = 0; i < 0x10; i++) {
-    std::cout << "5 - " << hT5.bucket_size(i) << endl;
     if (lowestSize > hT5.bucket_size(i)) {
       lowestSize = hT5.bucket_size(i);
     }
@@ -221,13 +208,10 @@ unsigned int SensorNIC::bestHashing() {
     bestBalance = tempBalance;
     tableIndex = 5;
   }
-  std::cout << tableIndex << ": " << highestSize << "-" << lowestSize << "= " << bestBalance << endl << endl;
 /////////////////////////////
   highestSize = 0;
   lowestSize = 99999;
-  std::cout << hT6.size() << " " <<  hT6.bucket_count() << endl;
   for (unsigned i = 0; i < 0x10; i++) {
-    std::cout << "6 - " << hT6.bucket_size(i) << endl;
     if (lowestSize > hT6.bucket_size(i)) {
       lowestSize = hT6.bucket_size(i);
     }
@@ -240,9 +224,8 @@ unsigned int SensorNIC::bestHashing() {
     bestBalance = tempBalance;
     tableIndex = 6;
   }
-  std::cout << tableIndex << ": " << highestSize << "-" << lowestSize << "= " << bestBalance << endl << endl;
 
-  std::cout << endl << "Table: " << tableIndex << endl;
+  //returns the table index with the best balance
   return tableIndex;
 }
 
