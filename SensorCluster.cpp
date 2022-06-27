@@ -144,7 +144,7 @@ unsigned int SensorNIC::bestHashing() {
 ///////////////////////
   // reset the highest/lowest sizes for comparing the next table
   highestSize = 0;
-  lowestSize = 99999;
+  lowestSize = UINT_MAX;
   for (unsigned i = 0; i < 0x10; i++) {
     if (lowestSize > hT2.bucket_size(i)) {
       lowestSize = hT2.bucket_size(i);
@@ -162,7 +162,7 @@ unsigned int SensorNIC::bestHashing() {
   }
 /////////////////////////////
   highestSize = 0;
-  lowestSize = 99999;
+  lowestSize = UINT_MAX;
   for (unsigned i = 0; i < 0x10; i++) {
     if (lowestSize > hT3.bucket_size(i)) {
       lowestSize = hT3.bucket_size(i);
@@ -178,7 +178,7 @@ unsigned int SensorNIC::bestHashing() {
   }
 /////////////////////////////
   highestSize = 0;
-  lowestSize = 99999;
+  lowestSize = UINT_MAX;
   for (unsigned i = 0; i < 0x10; i++) {
     if (lowestSize > hT4.bucket_size(i)) {
       lowestSize = hT4.bucket_size(i);
@@ -194,7 +194,7 @@ unsigned int SensorNIC::bestHashing() {
   }
 /////////////////////////////
   highestSize = 0;
-  lowestSize = 99999;
+  lowestSize = UINT_MAX;
   for (unsigned i = 0; i < 0x10; i++) {
     if (lowestSize > hT5.bucket_size(i)) {
       lowestSize = hT5.bucket_size(i);
@@ -210,7 +210,7 @@ unsigned int SensorNIC::bestHashing() {
   }
 /////////////////////////////
   highestSize = 0;
-  lowestSize = 99999;
+  lowestSize = UINT_MAX;
   for (unsigned i = 0; i < 0x10; i++) {
     if (lowestSize > hT6.bucket_size(i)) {
       lowestSize = hT6.bucket_size(i);
